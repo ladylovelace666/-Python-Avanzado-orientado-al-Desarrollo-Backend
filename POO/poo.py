@@ -235,8 +235,138 @@ miKwad = kwad("Linhai", "LH 500")
 miKwad.resumen() 
 
 
-class B_electrica(Vehiculo, V_electricos):
-    pass
+'''class B_electrica(Vehiculo, V_electricos):
+pass'''
+'''Por ejemplo, suponiendo que tenemos un método 
+estado() de la clase padre “vehículo”: 
 def estado(self): 
 print("Marca", self.marca,"Modelo", 
 self.modelo) 
+Si quisiéramos sobrescribir dicho método en una 
+clase hija “coche” y añadir el método “cilindrada”, 
+que se supone que ya he instanciado: 
+def cilindrada(self): 
+self.cilindrada=3000 
+def estado(self): 
+print("Marca", self.marca,"Modelo", 
+self.modelo, "Cilindrada", self.cilindrada) '''
+#Super() 
+#Esta función nos permite invocar y conservar un 
+#método o atributo de una clase padre (primaria) 
+#desde una clase hija (secundaria) sin tener que 
+#nombrarla explícitamente. Esto nos brinda la ventaja 
+#de poder cambiar el nombre de la clase padre (base) 
+#o hija (secundaria) cuando queramos y aun así 
+#mantener un código funcional, sencillo  y mantenible.
+
+
+#Para personalizar el constructor del padre de acuerdo 
+#a las necesidades del hijo se usa super().
+
+class Persona(): 
+    def __init__(self, nombre, edad, 
+    lugar): 
+        self.nombre=nombre 
+        self.edad=edad 
+        self.lugar=lugar 
+    def descripcion(self): 
+     print("El nombre es ", self.nombre, ", tiene ", self.edad, " anyos", " y es de ", self.lugar) 
+
+class Empleado(Persona): 
+    def __init__(self, salario,  antiguedad, nombre_emp, edad_emp,  lugar_epm):  
+        super().__init__(nombre_emp, edad_emp, lugar_epm) 
+        self.salario=salario 
+        self.antiguedad=antiguedad 
+            
+    def descripcion(self): 
+        super().descripcion() 
+        print("Salario: ", self.salario, ", antiguedad: ", self.antiguedad) 
+         
+Angel=Persona("Angel", 43, "Malaga") 
+Angel.descripcion() 
+ 
+Empleado1=Empleado(2000, 2017, "Manolo", 
+33, "Madrid") 
+Empleado1.descripcion() 
+
+
+#mismo ejemplo llamando al constructor de la clase padre
+
+class Padre(object): 
+    def __init__(self,ojos,cejas):
+        self.ojos = ojos
+        self.cejas = cejas 
+
+class Hijo(Padre):
+    def __init__(self,ojos,cejas,cara): #creamos el contructor de la clase especificando atributos 
+        Padre.__init__(self,ojos,cejas)
+        #especificamos la clase y llamamos a su contructor + atributos ´
+        self.cara = cara
+
+Tomas = Hijo('Marrones', 'Negras', 'Larga')
+print (Tomas.ojos, Tomas.cejas, Tomas.cara)
+
+#utilizando super(). De esta forma es csi el mismo código, pero NO necesitamos especificar la clase 
+#padre, por lo que podremos cambiarle el nombre en cualquier momento y nuestro código seguirá funcional
+class Padre(object): #Creamos la clase Padre 
+    def __init__(self, ojos, cejas): 
+#Definimos los Atributos 
+        self.ojos = ojos 
+        self.cejas = cejas 
+class Hijo(Padre):
+    def __init__(self, ojos, cejas, cara):
+        super().__init__(ojos,cejas) 
+        #solicitamos a super llamar de la clase padre esos atributos 
+        self.cara = cara
+Tomas = Hijo('Marrones', 'Negras', 'Larga')
+print (Tomas.ojos, Tomas.cejas, Tomas.cara)
+#nos quedamos con esta forma de llamar al constructor del padre, ya que es más sencilla y mantenible.
+'''Nota: En el caso de la Herencia Múltiple super() no 
+nos sirve. Debemos llamar a los constructores de 
+ambas clases especificándolas por su nombre y si 
+cambiamos el nombre u orden de la clase deberemos 
+especificarlo.'''
+#ENCAPSULACIÓN
+#Es el proceso de ocultar los detalles internos de un objeto y mostrar solo la funcionalidad esencial. En Python, se pueden usar convenciones de nomenclatura para indicar el nivel de acceso a los atributos y métodos de una clase.
+
+'''• Public: Los atributos public serán accesibles y 
+modificables desde cualquier parte de nuestro 
+código. Es el valor por defecto y sería el 
+equivalente a no poner nada. 
+• Protected: Podemos acceder a él desde la 
+misma clase y clases hijas. 
+• Private: Accesible únicamente desde su clase. '''
+class Ejemplo: 
+    __atributo_privado = "Soy un atributo inalcanzable desde fuera."
+    def __metodo_privado(self): 
+        print("Soy un método inalcanzable desde fuera.")
+    def atributo_publico(self): 
+        return self.__atributo_privado
+    def metodo_publico(self):
+        return self.__metodo_privado()
+e = Ejemplo ()
+print(e.atributo_publico())
+e.atributo_publico()
+
+
+class Coche:
+    #método constructor
+    def __init__(self):
+        self.__largo = 250
+        self.__ancho = 120
+        self.__color = "rojo"
+        self.__ruedas  = 4
+        self.__peso= 900
+        self.__is_enMarcha = False
+    #declaración de métodos 
+    def arrancar (self):
+        self.__is_enMarcha = True   
+    def estado (self):
+        if ( self.__is_enMarcha == True):
+            return "El coche está arrancado"
+        else:
+            return "El coche está parado"
+miCoche = Coche()
+miCoche.__ruedas = 9
+print("El número de ruedas del coche es: ", miCoche.__ruedas)
+print("El número de ruedas del coche es: ", miCoche._Coche__ruedas)
