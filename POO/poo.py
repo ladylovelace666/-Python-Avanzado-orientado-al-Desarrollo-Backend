@@ -374,11 +374,11 @@ print("El número de ruedas del coche es: ", miCoche._Coche__ruedas)
 #la que objetos de distintas subclases pueden 
 #responder a una misma acción. 
 
-def rebajar_producto(producto,rebaja):
+'''def rebajar_producto(producto,rebaja):
     producto.pvp = producto.pvp - (producto.pvp/100 *rebaja)
     print (alimento,"\n")
     rebajar_producto (alimento,10)
-    print (alimento)
+    print (alimento) '''
 
 
 
